@@ -109,9 +109,8 @@ class RequestServiceImplUnitTest {
         AskingResource askingResource2 = AskingResource.builder().resource(resource2).count(20).build();
 
         Request requestBeforeWork = new Request(1, "Viktor", "B", "Evgenevich", RequestType.DRAWING_LOTS, localDateNow, 10, 100000, List.of(askingResource1), null, localDateNow);
-        Request requestAfterWork = new Request(1, "Biktor", "V", "Evgenevichch", RequestType.MASS_SPECIES, localDateNow.plusDays(2), 20, 200000, List.of(askingResource2), null, localDateNow.plusDays(1));
+        Request requestAfterWork = new Request(1, "Biktor", "V", "Evgenevichch", RequestType.MASS_SPECIES, localDateNow.plusDays(2), 20, 200000, List.of(askingResource2), null, localDateNow);
 
-        RequestDto requestDtoBeforeWork = new RequestDto("Viktor", "B", "Evgenevich", RequestType.DRAWING_LOTS, localDateNow, 10, 100000, List.of(askingResourceDto1), localDateNow, null);
         RequestDto requestDtoAfterWork = new RequestDto("Biktor", "V", "Evgenevichch", RequestType.MASS_SPECIES, localDateNow.plusDays(2), 20, 200000, List.of(askingResourceDto2), localDateNow, null);
 
         askingResource1.setRequest(requestBeforeWork);
@@ -123,7 +122,7 @@ class RequestServiceImplUnitTest {
         Mockito.when(requestRepository.save(Mockito.any(Request.class)))
                 .thenReturn(requestAfterWork);
 
-        RequestDto requestDto = requestService.patchRequest(requestDtoBeforeWork, 1);
+        RequestDto requestDto = requestService.patchRequest(requestDtoAfterWork, 1);
 
         Assertions.assertEquals(requestDtoAfterWork, requestDto);
     }
